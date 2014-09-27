@@ -3,7 +3,7 @@ using System.Collections;
 using System.IO;
 using System;
 
-public class CreateTerrain : MonoBehaviour
+public class CreateTerrain1 : MonoBehaviour
 {
 
     public static string filename = "output.txt";
