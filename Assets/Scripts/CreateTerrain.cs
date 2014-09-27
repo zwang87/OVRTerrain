@@ -88,6 +88,8 @@ public class CreateTerrain : MonoBehaviour
         _UV = new Vector2[width * height];
         _Triangles = new int[6 * ((width - 1) * (height - 1))];
 
+        colors = new Color[width * height];
+
         int triangleIndex = 0;
         
 
@@ -99,6 +101,10 @@ public class CreateTerrain : MonoBehaviour
                 //int index2 = (y - height) * width + x;
 
                 _Vertices[index] = new Vector3(x, y, dataArray[index]);
+
+                float ratio = (dataArray[index] + 35) / 80.0f;
+                colors[index] = ToColor(ratio, 1.0f, 1.0f);
+                //colors[index] = Color.red;
                 _UV[index] = new Vector2(((float)x / (float)width), ((float)y / (float)height));
 
                 // Skip the last row/col
@@ -122,6 +128,7 @@ public class CreateTerrain : MonoBehaviour
         _Mesh.vertices = _Vertices;
         _Mesh.uv = _UV;
         _Mesh.triangles = _Triangles;
+        _Mesh.colors = colors;
         _Mesh.RecalculateNormals();
         GetComponent<MeshCollider>().mesh = _Mesh;
         /////////////////////////////////////////////
@@ -134,6 +141,7 @@ public class CreateTerrain : MonoBehaviour
     private Vector3[] _Vertices;
     private Vector2[] _UV;
     private int[] _Triangles;
+    private Color[] colors;
 
     void CreateMesh(int width, int height)
     {
@@ -143,6 +151,7 @@ public class CreateTerrain : MonoBehaviour
         _Vertices = new Vector3[width * height];
         _UV = new Vector2[width * height];
         _Triangles = new int[6 * ((width - 1) * (height - 1))];
+       
 
         int triangleIndex = 0;
         for (int y = 0; y < height; y++)
@@ -178,8 +187,64 @@ public class CreateTerrain : MonoBehaviour
         _Mesh.RecalculateNormals();
     }
 
-    void Update()
+    public Color ToColor(float hsbColorh, float hsbColors, float hsbColorb)
     {
+        float r = hsbColorb;
+        float g = hsbColorb;
+        float b = hsbColorb;
+        if (hsbColors != 0)
+        {
+            float max = hsbColorb;
+            float dif = hsbColorb * hsbColors;
+            float min = hsbColorb - dif;
 
+            float h = hsbColorh * 360f;
+
+            if (h < 60f)
+            {
+                r = max;
+                g = h * dif / 60f + min;
+                b = min;
+            }
+            else if (h < 120f)
+            {
+                r = -(h - 120f) * dif / 60f + min;
+                g = max;
+                b = min;
+            }
+            else if (h < 180f)
+            {
+                r = min;
+                g = max;
+                b = (h - 120f) * dif / 60f + min;
+            }
+            else if (h < 240f)
+            {
+                r = min;
+                g = -(h - 240f) * dif / 60f + min;
+                b = max;
+            }
+            else if (h < 300f)
+            {
+                r = (h - 240f) * dif / 60f + min;
+                g = min;
+                b = max;
+            }
+            else if (h <= 360f)
+            {
+                r = max;
+                g = min;
+                b = -(h - 360f) * dif / 60 + min;
+            }
+            else
+            {
+                r = 0;
+                g = 0;
+                b = 0;
+            }
+        }
+
+        return new Color(Mathf.Clamp01(r), Mathf.Clamp01(g), Mathf.Clamp01(b));
     }
+    
 }

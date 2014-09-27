@@ -16,6 +16,7 @@ public class CreateTerrain2 : MonoBehaviour
     private int width = 360;
 
     private float[,] heightMapData = new float[480, 360];
+    private Color[] colors;
 
     Terrain terrain;
     Mesh mesh;
@@ -79,7 +80,7 @@ public class CreateTerrain2 : MonoBehaviour
 
         */
         ////////////////////////////////////
-        height = 180;
+        height = 181;
         //width = 120;
         _Mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = _Mesh;
@@ -87,22 +88,27 @@ public class CreateTerrain2 : MonoBehaviour
         _Vertices = new Vector3[width * height];
         _UV = new Vector2[width * height];
         _Triangles = new int[6 * ((width - 1) * (height - 1))];
+        colors = new Color[width*height];
 
         int triangleIndex = 0;
         
 
-        for (int y = 180; y < height*2; y++)
+        for (int y = 180; y < 180 + height; y++)
         {
             for (int x = 0; x < width; x++)
             {
                 int index = (y * width) + x;
-                int index2 = (y - height) * width + x;
+                int index2 = (y - 180) * width + x;
 
                 _Vertices[index2] = new Vector3(x, y, dataArray[index]);
+
+                float ratio = (dataArray[index] + 35)/ 80.0f;
+
+                colors[index2] = ToColor(ratio, 1.0f, 1.0f);
                 _UV[index2] = new Vector2(((float)x / (float)width), ((float)y / (float)height));
 
                 // Skip the last row/col
-                if (x != (width - 1) && y != height*2 - 1)
+                if (x != (width - 1) && y != 180 + height - 1)
                 {
                     int topLeft = index2;
                     int topRight = topLeft + 1;
@@ -122,6 +128,7 @@ public class CreateTerrain2 : MonoBehaviour
         _Mesh.vertices = _Vertices;
         _Mesh.uv = _UV;
         _Mesh.triangles = _Triangles;
+        _Mesh.colors = colors;
         _Mesh.RecalculateNormals();
        
         /////////////////////////////////////////////
@@ -174,12 +181,67 @@ public class CreateTerrain2 : MonoBehaviour
 
         _Mesh.vertices = _Vertices;
         _Mesh.uv = _UV;
+        _Mesh.colors = colors;
         _Mesh.triangles = _Triangles;
         _Mesh.RecalculateNormals();
     }
 
-    void Update()
+    public Color ToColor(float hsbColorh, float hsbColors, float hsbColorb)
     {
+        float r = hsbColorb;
+        float g = hsbColorb;
+        float b = hsbColorb;
+        if (hsbColors != 0)
+        {
+            float max = hsbColorb;
+            float dif = hsbColorb * hsbColors;
+            float min = hsbColorb - dif;
 
+            float h = hsbColorh * 360f;
+
+            if (h < 60f)
+            {
+                r = max;
+                g = h * dif / 60f + min;
+                b = min;
+            }
+            else if (h < 120f)
+            {
+                r = -(h - 120f) * dif / 60f + min;
+                g = max;
+                b = min;
+            }
+            else if (h < 180f)
+            {
+                r = min;
+                g = max;
+                b = (h - 120f) * dif / 60f + min;
+            }
+            else if (h < 240f)
+            {
+                r = min;
+                g = -(h - 240f) * dif / 60f + min;
+                b = max;
+            }
+            else if (h < 300f)
+            {
+                r = (h - 240f) * dif / 60f + min;
+                g = min;
+                b = max;
+            }
+            else if (h <= 360f)
+            {
+                r = max;
+                g = min;
+                b = -(h - 360f) * dif / 60 + min;
+            }
+            else
+            {
+                r = 0;
+                g = 0;
+                b = 0;
+            }
+        }
+        return new Color(Mathf.Clamp01(r), Mathf.Clamp01(g), Mathf.Clamp01(b));
     }
 }

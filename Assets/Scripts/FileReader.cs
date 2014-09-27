@@ -14,8 +14,8 @@ public class FileReader : MonoBehaviour {
     private const int width = 360;
     private const int height = 480;
 
-    private float[,] heightMapData = new float[height, width]; 
-    
+    private float[,] heightMapData = new float[height, width];
+    private float[,] alphaMaps = new float[height, width];
     Terrain terrain;
 
     float min = 0;
@@ -66,17 +66,65 @@ public class FileReader : MonoBehaviour {
             for (int j = 0; j < width; j++)
             {
                 heightMapData[i, j] = dataArray[i * width + j];
+                 //alphaMaps[i, j] = 
             }
 
             
-            
+           
         
         terrain.terrainData.SetHeights(0, 0, heightMapData);
+       // terrain.terrainData.SetAlphamaps(0, 0, )
 	}
-	
-    public float[] getData()
+
+    public Color HSBtoRGB(float hue, float saturation, float brightness)
     {
-        return dataArray;
+        int r = 0, g = 0, b = 0;
+        if (saturation == 0)
+        {
+            r = g = b = (int)(brightness * 255.0f + 0.5f);
+        }
+        else
+        {
+            float h = (hue - (float)Math.Floor(hue)) * 6.0f;
+            float f = h - (float)Math.Floor(h);
+            float p = brightness * (1.0f - saturation);
+            float q = brightness * (1.0f - saturation * f);
+            float t = brightness * (1.0f - (saturation * (1.0f - f)));
+            switch ((int)h)
+            {
+                case 0:
+                    r = (int)(brightness * 255.0f + 0.5f);
+                    g = (int)(t * 255.0f + 0.5f);
+                    b = (int)(p * 255.0f + 0.5f);
+                    break;
+                case 1:
+                    r = (int)(q * 255.0f + 0.5f);
+                    g = (int)(brightness * 255.0f + 0.5f);
+                    b = (int)(p * 255.0f + 0.5f);
+                    break;
+                case 2:
+                    r = (int)(p * 255.0f + 0.5f);
+                    g = (int)(brightness * 255.0f + 0.5f);
+                    b = (int)(t * 255.0f + 0.5f);
+                    break;
+                case 3:
+                    r = (int)(p * 255.0f + 0.5f);
+                    g = (int)(q * 255.0f + 0.5f);
+                    b = (int)(brightness * 255.0f + 0.5f);
+                    break;
+                case 4:
+                    r = (int)(t * 255.0f + 0.5f);
+                    g = (int)(p * 255.0f + 0.5f);
+                    b = (int)(brightness * 255.0f + 0.5f);
+                    break;
+                case 5:
+                    r = (int)(brightness * 255.0f + 0.5f);
+                    g = (int)(p * 255.0f + 0.5f);
+                    b = (int)(q * 255.0f + 0.5f);
+                    break;
+            }
+        }
+        return new Color(r, g, b);
     }
 
 	// Update is called once per frame

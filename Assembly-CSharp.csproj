@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{45963844-788F-821B-128E-30AFA563321A}</ProjectGuid>
+	<ProjectGuid>{8F84DB3A-451F-1224-CE25-DFE869581618}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -62,12 +62,13 @@
      <Compile Include="Assets\OVR\Scripts\OVRVisionGuide.cs" />
      <Compile Include="Assets\Scripts\CreateTerrain.cs" />
      <Compile Include="Assets\Scripts\CreateTerrain2.cs" />
+     <Compile Include="Assets\Scripts\CreateTerrain3.cs" />
      <Compile Include="Assets\Scripts\FileReader.cs" />
      <Compile Include="Assets\Scripts\OVRController.cs" />
      <Compile Include="Assets\Scripts\TerrainGenerator.cs" />
-     <Compile Include="Assets\Scripts\test.cs" />
      <None Include="Assets\Plugins\donotdelete.txt" />
      <None Include="Assets\OVR\Shaders\TextShader3D.shader" />
+     <None Include="Assets\Shader\VertexColor.shader" />
      <None Include="Assets\Resources\output.txt" />
      <None Include="Assets\OVR\Shaders\OVRGUIShader.shader" />
   </ItemGroup>

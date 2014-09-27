@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{2B9B9229-ED0E-2293-67F8-17A96C75A413}</ProjectGuid>
+	<ProjectGuid>{D534FD0C-EF6B-0D7A-3E4B-7409536DAE39}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -56,6 +56,7 @@
      <Compile Include="Assets\OVR\Editor\OVRUGUIEditor.cs" />
      <None Include="Assets\Plugins\donotdelete.txt" />
      <None Include="Assets\OVR\Shaders\TextShader3D.shader" />
+     <None Include="Assets\Shader\VertexColor.shader" />
      <None Include="Assets\Resources\output.txt" />
      <None Include="Assets\OVR\Shaders\OVRGUIShader.shader" />
  <Reference Include="UnityEditor.Graphs">
@@ -64,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{45963844-788F-821B-128E-30AFA563321A}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+      <Project>{8F84DB3A-451F-1224-CE25-DFE869581618}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
