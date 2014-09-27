@@ -5,8 +5,9 @@ using System;
 
 public class TerrainGenerator : MonoBehaviour {
 
-    public static string filename = "output.txt";
+    public string filename = "output.txt";
     public UnityEngine.Object prefab;
+    public float colorScale = 1.1f;
     private string[] stringArray;
     public float[] dataArray;
     private int arraySize = 0;
@@ -103,6 +104,9 @@ public class TerrainGenerator : MonoBehaviour {
         _UV = new Vector2[width * heightSize];
         _Triangles = new int[6 * ((width - 1) * (heightSize - 1))];
 
+        Texture2D texture = new Texture2D(width, heightSize);
+        terrainTile.renderer.material.mainTexture = texture;
+
         //for adding color to terrain
         //colors = new Color[width * height];
 
@@ -120,6 +124,11 @@ public class TerrainGenerator : MonoBehaviour {
                 //for adding color to terrain
                 //float ratio = (dataArray[index] + 35) / 80.0f;
                 //colors[index] = ToColor(ratio, 1.0f, 1.0f);
+
+                //texture
+                float cH = (dataArray[index] - min) / (max - min) / colorScale;
+                Color color = new Color(cH, cH, cH);
+                texture.SetPixel(x, y, color);
                 
                 _UV[localIndex] = new Vector2(((float)x / (float)width), ((float)y / (float)heightSize));
 
@@ -140,7 +149,7 @@ public class TerrainGenerator : MonoBehaviour {
                 }
             }
         }
-
+        texture.Apply();
         _Mesh.vertices = _Vertices;
         _Mesh.uv = _UV;
         _Mesh.triangles = _Triangles;

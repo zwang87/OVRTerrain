@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\OVR\Scripts\OVRCamera.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRCameraController.cs" />
+     <Compile Include="Assets\OVR\Scripts\OVRController.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRCrosshair.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRDevice.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRGUI.cs" />
@@ -60,12 +61,9 @@
      <Compile Include="Assets\OVR\Scripts\OVRUGUI.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRUtils.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRVisionGuide.cs" />
-     <Compile Include="Assets\Scripts\CreateTerrain1.cs" />
-     <Compile Include="Assets\Scripts\CreateTerrain2.cs" />
-     <Compile Include="Assets\Scripts\CreateTerrain3.cs" />
      <Compile Include="Assets\Scripts\FileReader.cs" />
-     <Compile Include="Assets\Scripts\OVRController.cs" />
      <Compile Include="Assets\Scripts\TerrainGenerator.cs" />
+     <Compile Include="Assets\Scripts\test.cs" />
      <None Include="Assets\Plugins\donotdelete.txt" />
      <None Include="Assets\OVR\Shaders\TextShader3D.shader" />
      <None Include="Assets\Shader\VertexColor.shader" />

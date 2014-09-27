@@ -3,11 +3,16 @@ using System.Collections;
 
 public class OVRController : MonoBehaviour {
     public float moveScale = 1.0f;
+    public float jumpLimit = 60.0f;
+    private bool isJump = false;
+
 	// Use this for initialization
 	void Start () {
 	
 	}
-	
+
+    
+
 	// Update is called once per frame
 	void Update () {
         if(Input.GetKeyDown(KeyCode.UpArrow))
@@ -33,6 +38,19 @@ public class OVRController : MonoBehaviour {
         else if (Input.GetKeyDown(KeyCode.Minus))
         {
             transform.position -= transform.forward * moveScale;
+        }
+        if (Input.GetKey(KeyCode.Space) && transform.position.y < jumpLimit)
+        {
+            isJump = true;
+        }
+        else if (!Input.GetKey(KeyCode.Space) || transform.position.y >= jumpLimit)
+        {
+            isJump = false;
+        }
+
+        if (isJump)
+        {
+            transform.position += transform.up * moveScale;
         }
 	}
 }
