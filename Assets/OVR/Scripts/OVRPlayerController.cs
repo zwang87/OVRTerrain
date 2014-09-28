@@ -47,6 +47,10 @@ using System.Collections.Generic;
 /// </summary>
 public class OVRPlayerController : MonoBehaviour
 {
+
+    public float MoveScale = 1.0f;
+    public float JumpScale = 1.0f;
+    public float jumpLimit = 100.0f;
 	#region Public Variables
 	/// <summary>
 	/// How quickly the player's speed will increase.
@@ -92,9 +96,11 @@ public class OVRPlayerController : MonoBehaviour
 	protected CharacterController 	Controller 		 = null;
 	protected OVRCameraController 	CameraController = null;
 
-	private float   MoveScale 	   = 1.0f;
+	//private float   MoveScale 	   = 1.0f;
 	private Vector3 MoveThrottle   = Vector3.zero;
 	private float   FallSpeed 	   = 0.0f;
+    private bool isJump = false;
+    private float currentJumpScale = 1.0f;
 	
 	// Initial direction of controller (passed down into CameraController)
 	private Quaternion OrientationOffset = Quaternion.identity;			
@@ -246,7 +252,29 @@ public class OVRPlayerController : MonoBehaviour
 		if (Input.GetKey(KeyCode.UpArrow))    moveForward = true;
 		if (Input.GetKey(KeyCode.LeftArrow))  moveLeft 	  = true;
 		if (Input.GetKey(KeyCode.DownArrow))  moveBack 	  = true; 
-		if (Input.GetKey(KeyCode.RightArrow)) moveRight   = true; 
+		if (Input.GetKey(KeyCode.RightArrow)) moveRight   = true;
+
+        
+        //Space for jump
+        if (Input.GetKey(KeyCode.Space) && transform.position.y < jumpLimit)
+        {
+            isJump = true;
+        }
+        else if (!Input.GetKey(KeyCode.Space) || transform.position.y >= jumpLimit)
+        {
+            isJump = false;
+        }
+
+        if (isJump)
+        {
+            if (transform.position.y > jumpLimit * 0.65f)
+                currentJumpScale = JumpScale * (jumpLimit - transform.position.y) / (jumpLimit * 0.35f - 5);
+            transform.position += transform.up * currentJumpScale;
+        }
+        else
+        {
+            currentJumpScale = JumpScale;
+        }
 
 		// D-Pad
 		bool dpad_move = false;

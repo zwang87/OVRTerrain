@@ -61,6 +61,7 @@
      <Compile Include="Assets\OVR\Scripts\OVRUGUI.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRUtils.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRVisionGuide.cs" />
+     <Compile Include="Assets\Scripts\CreateTerrain.cs" />
      <Compile Include="Assets\Scripts\FileReader.cs" />
      <Compile Include="Assets\Scripts\TerrainGenerator.cs" />
      <Compile Include="Assets\Scripts\test.cs" />
