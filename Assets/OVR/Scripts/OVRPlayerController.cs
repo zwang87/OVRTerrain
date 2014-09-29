@@ -48,14 +48,14 @@ using System.Collections.Generic;
 public class OVRPlayerController : MonoBehaviour
 {
 
-    public float MoveScale = 1.0f;
-    public float JumpScale = 1.0f;
+    public float MoveScale = 15.0f;
+    public float JumpScale = 0.1f;
     public float jumpLimit = 100.0f;
 	#region Public Variables
 	/// <summary>
 	/// How quickly the player's speed will increase.
 	/// </summary>
-	public float Acceleration 	   = 0.1f;
+	public float Acceleration 	   = 1.1f;
 
 	/// <summary>
 	/// How quickly the player's speed will dissipate.
@@ -100,7 +100,7 @@ public class OVRPlayerController : MonoBehaviour
 	private Vector3 MoveThrottle   = Vector3.zero;
 	private float   FallSpeed 	   = 0.0f;
     private bool isJump = false;
-    private float currentJumpScale = 1.0f;
+    private float currentJumpScale = .1f;
 	
 	// Initial direction of controller (passed down into CameraController)
 	private Quaternion OrientationOffset = Quaternion.identity;			
@@ -236,7 +236,7 @@ public class OVRPlayerController : MonoBehaviour
 		bool moveRight   = false;
 		bool moveBack    = false;
 				
-		MoveScale = 1.0f;
+		MoveScale = 4.0f;
 			
 		// * * * * * * * * * * *
 		// Keyboard input
@@ -269,7 +269,7 @@ public class OVRPlayerController : MonoBehaviour
         {
             if (transform.position.y > jumpLimit * 0.65f)
                 currentJumpScale = JumpScale * (jumpLimit - transform.position.y) / (jumpLimit * 0.35f - 5);
-            transform.position += transform.up * currentJumpScale;
+            transform.position += transform.up * currentJumpScale*.36f;
         }
         else
         {

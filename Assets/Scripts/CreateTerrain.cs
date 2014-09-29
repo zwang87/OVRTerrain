@@ -11,6 +11,8 @@ public class CreateTerrain : MonoBehaviour {
     public float[] dataArray;
     private int arraySize = 0;
 
+    public Material TMaterial;
+
     private int downSampleSize = 2;
     
 
@@ -30,9 +32,12 @@ public class CreateTerrain : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+
          try
          {
-            using(StreamReader sr = new StreamReader("Assets/Resources/" + filename))
+             string path = Application.dataPath;
+             path = path + "/output.txt";
+            using(StreamReader sr = new StreamReader(path))
             {
                 stringArray = sr.ReadToEnd().Split('\n');
                 arraySize = stringArray.Length;
@@ -108,6 +113,8 @@ public class CreateTerrain : MonoBehaviour {
         _UV = new Vector2[width * height];
         _Triangles = new int[6 * ((width - 1) * (height - 1))];
 
+        transform.renderer.material = TMaterial;
+
         Texture2D texture = new Texture2D(width, height);
         transform.renderer.material.mainTexture = texture;
 
@@ -122,7 +129,7 @@ public class CreateTerrain : MonoBehaviour {
             {
                 int index = (y * width) + x;
                 int originIndex = (y * downSampleSize * width * downSampleSize) + x * downSampleSize;
-                _Vertices[index] = new Vector3(x, y, dataArray[originIndex]);
+                _Vertices[index] = new Vector3(x, y, dataArray[originIndex]*.6f);
 
                 //for adding color to terrain
                 //float ratio = (dataArray[index] + 35) / 80.0f;

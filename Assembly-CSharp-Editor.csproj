@@ -55,10 +55,11 @@
      <Compile Include="Assets\OVR\Editor\OVRShimLoader.cs" />
      <Compile Include="Assets\OVR\Editor\OVRUGUIEditor.cs" />
      <None Include="Assets\Plugins\donotdelete.txt" />
+     <None Include="Assets\output.txt" />
      <None Include="Assets\OVR\Shaders\TextShader3D.shader" />
      <None Include="Assets\Shader\VertexColor.shader" />
-     <None Include="Assets\Resources\output.txt" />
      <None Include="Assets\OVR\Shaders\OVRGUIShader.shader" />
+     <None Include="Assets\Resources\outputTest.txt" />
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>

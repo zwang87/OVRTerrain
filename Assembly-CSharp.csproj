@@ -63,13 +63,15 @@
      <Compile Include="Assets\OVR\Scripts\OVRVisionGuide.cs" />
      <Compile Include="Assets\Scripts\CreateTerrain.cs" />
      <Compile Include="Assets\Scripts\FileReader.cs" />
+     <Compile Include="Assets\Scripts\ReverseNormals.cs" />
      <Compile Include="Assets\Scripts\TerrainGenerator.cs" />
      <Compile Include="Assets\Scripts\test.cs" />
      <None Include="Assets\Plugins\donotdelete.txt" />
+     <None Include="Assets\output.txt" />
      <None Include="Assets\OVR\Shaders\TextShader3D.shader" />
      <None Include="Assets\Shader\VertexColor.shader" />
-     <None Include="Assets\Resources\output.txt" />
      <None Include="Assets\OVR\Shaders\OVRGUIShader.shader" />
+     <None Include="Assets\Resources\outputTest.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
